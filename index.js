@@ -16,10 +16,9 @@ require('./profile.js')(app)
 require('./following.js')(app)
 require('./model.js')
 
-app.get('/', function(req, res) {
-    res.send({hello:"world"})
-  })
-  
+
+const hello = (req, res) => res.send({ hello: 'world' })
+app.get('/', hello)
 
 
 const port = process.env.PORT || 3000
