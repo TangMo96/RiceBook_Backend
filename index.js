@@ -17,16 +17,10 @@ require('./following.js')(app)
 require('./model.js')
 
 app.get('/', function(req, res) {
-    console.log('Cookies: ', req.cookies)
+    res.send({hello:"world"})
   })
   
-function isLoggedIn(req, res, next) {   
-    // var id = req.cookies['sessionId']    
-    // ...
-    // req.user = ...
-    res.json({middleware:"used"});
-    return next()
-}
+
 
 const port = process.env.PORT || 3000
 const server = app.listen(port, () => {
