@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.163" tests="2" failures="0">
+  <testsuite name="Root Suite" timestamp="2017-11-19T03:49:21" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="Validate Article functionality" timestamp="2017-11-19T03:49:21" tests="2" file="/Users/apple/Documents/Comp 531/hw6backend/test.spec.js" failures="0" time="0.163">
+    <testcase name="Validate Article functionality PUT/headline is valid" time="0.097" classname="PUT/headline is valid">
+    </testcase>
+    <testcase name="Validate Article functionality POST/article is valid" time="0.066" classname="POST/article is valid">
+    </testcase>
+  </testsuite>
+</testsuites>
