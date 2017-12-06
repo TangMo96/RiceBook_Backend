@@ -7,7 +7,7 @@ const app = express()
 
 
 app.use(function (req, res, next) {
-        var cuihaosb = req.header.origin || "*";
+        var cuihaosb = req.headers.origin || "*";
     
         // Website you wish to allow to connect
         res.setHeader('Access-Control-Allow-Origin', cuihaosb);
