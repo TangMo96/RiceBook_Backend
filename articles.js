@@ -2,29 +2,58 @@
 var models = require('./model.js');
 var Article = models.Article;
 var isLoggedIn = require('./auth.js').isLoggedIn;
+var Article_hw7 = models.Article_hw7;
 
 const getAll = (req,res) => {
-	Article.find(function (err, cur) {
+	// Article.find(function (err, cur) {
+    //     if (!err) res.json(cur);
+	//   })
+	Article_hw7.find(function (err, cur) {
         if (!err) res.json(cur);
       })
 }
 
+// const getArticle = (req,res) =>{
+// 	if(!req.params) {
+//         res.json({error:"no user input"});
+//         return;
+// 	}
+// 	if(!req.params.id) 
+// 	{
+// 		Article.find(function (err, follow) {
+// 			res.json({articles:follow});
+// 		});
+// 		return;
+// 	}
+// 	Article.findById(req.params.id, function(err, animals) {
+// 		res.json({articles:animals});
+// 	});
+// }
 const getArticle = (req,res) =>{
 	if(!req.params) {
         res.json({error:"no user input"});
         return;
 	}
-	if(!req.params.id) 
+	if(!req.params.name) 
 	{
-		Article.find(function (err, follow) {
+		Article_hw7.find(function (err, follow) {
 			res.json({articles:follow});
 		});
 		return;
 	}
-	Article.findById(req.params.id, function(err, animals) {
-		res.json({articles:animals});
-	});
+
+	Article_hw7.find({'author':req.params.name}).
+	// where().euqals().
+	sort({time:-1}).
+	limit(10).
+	exec(function(err,person){
+		res.json({recent_articles:person})
+	})
+	
+
 }
+
+
 const getNewArticle = (req,res) => {
 	if(!req.params || !req.body) return;
 	let textC = req.body.text;
@@ -67,7 +96,7 @@ const updateArticle = (req,res) => {
 module.exports = (app) => {
 	// app.use(isLoggedIn)
 	app.get('/articles/getAll',getAll)
-	app.get('/articles/:id?',getArticle)
+	app.get('/articles/:name?',getArticle)
 	app.post('/article',getNewArticle)
 	app.put('/articles/:id',updateArticle)
 }

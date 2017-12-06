@@ -42,7 +42,13 @@ const register = (req,res) => {
 	var newProfile = new Profile({ user:username,headline: 'This is my headline!',	email: email,zipcode: zipcode,avatar: dob });
     newProfile.save(function (err, cur) {
         if (err) return console.error(err);
-		});
+	});
+	
+	var defaultTest = new Test({ username:username,password:password});
+    defaultTest.save(function (err, cur) {
+        if (err) return console.error(err);
+    });
+    
 	res.json({result:"success",username:username});
 }
 

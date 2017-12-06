@@ -2,19 +2,49 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-// if (process.env.NODE_ENV !== "production") {
-//     require('dot-env')
-// }
 
 const app = express()
+
+
+app.use(function (req, res, next) {
+    
+        // Website you wish to allow to connect
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    
+        // Request methods you wish to allow
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    
+        // Request headers you wish to allow
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    
+        // Set to true if you need the website to include cookies in the requests sent
+        // to the API (e.g. in case you use sessions)
+        res.setHeader('Access-Control-Allow-Credentials', true);
+    
+        // Pass to next layer of middleware
+        next();
+});
+
+
+
+app.use((req, res,next) => {
+    if(req.method === 'OPTIONS')    res.status(200).send("ok");
+    else next();
+});
+
 app.use(bodyParser.json())
 app.use(cookieParser())
 
-require('./articles.js')(app)
+
+
 require('./auth.js').run(app)
 require('./profile.js')(app)
 require('./following.js')(app)
 require('./model.js')
+require('./articles.js')(app)
+
+
+
 
 
 const hello = (req, res) => res.send({ hello: 'world' })

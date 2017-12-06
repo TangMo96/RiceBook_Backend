@@ -43,6 +43,25 @@ User.find(function (err, follow) {
     }
 })
 //-----------------
+const authorList = ["tangmo","migu","moxingyu","liujinrui"];
+const textList = ["ha","1214123","lalala","I am happy","who are you","sasaadasd"];
+
+var article_hw7 = mongoose.Schema({
+    author: String,
+    text: String,
+    time: [Date],
+});
+var Article_hw7 = mongoose.model('Article_hw7',article_hw7);
+Article_hw7.find(function (err, follow) {
+
+    var defaultArticle_hw7 = new Article_hw7({ author:authorList[Math.floor(Math.random()*4)],text:textList[Math.floor(Math.random()*6)],time:new Date });
+    defaultArticle_hw7.save(function (err, cur) {
+        if (err) return console.error(err);
+        });
+    
+})
+
+
 var profiles = mongoose.Schema({
     user: String,
     headline: String,
@@ -117,6 +136,10 @@ Following.find(function (err, follow) {
 exports.Profile = Profile;
 exports.Article = Article;
 exports.Following = Following;
+exports.Article_hw7 = Article_hw7;
+
+
+
 exports.User = User;
 
 
